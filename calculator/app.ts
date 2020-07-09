@@ -8,11 +8,11 @@ class Calculator {
 
     protected numberElements: NodeListOf<HTMLButtonElement>;
 
-    private waitForSecondOperand: boolean;
-    private dotOperand: boolean;
+    protected waitForSecondOperand: boolean;
+    protected dotOperand: boolean;
 
-    private num1: number;
-    private num2: number;
+    protected num1: number;
+    protected num2: number;
 
     constructor(displayElementId: string, operatorElementClass: string, numberElementClass: string, displayElementClass: string) {
 
@@ -27,6 +27,7 @@ class Calculator {
     }
 
     public writeEvents() {
+
         document.getElementById('equal').addEventListener('click', this.operateEqual);
 
         document.querySelector('.decimal').addEventListener('click', this.setDot);
@@ -114,7 +115,7 @@ class Calculator {
         (this.displayElement as HTMLInputElement).value = result;
     }
 
-    protected setDot = () => {
+    protected setDot = (): void => {
         this.concatWithCurrentDisplay();
         this.dotOperand = true;
     }
@@ -127,7 +128,7 @@ class Calculator {
         return newValue;
     }
 
-    public reset = () => {
+    public reset = (): void => {
         this.displayValue = 0;
         this.operator = null;
         this.dotOperand = false;
@@ -138,7 +139,7 @@ class Calculator {
         this.updateDisplay("");
     }
 
-    protected calculate() {
+    protected calculate(): number {
         switch (this.operator) {
             case "+": {
                 return this.add();
@@ -158,22 +159,22 @@ class Calculator {
         }
     }
 
-    protected add() {
+    protected add(): number {
         this.num1 = this.displayValue = this.num1 + this.num2;
         return this.displayValue;
     }
 
-    protected subtract() {
+    protected subtract(): number {
         this.num1 = this.displayValue = this.num1 - this.num2;
         return this.displayValue;
     }
 
-    protected multiply() {
+    protected multiply(): number {
         this.num1 = this.displayValue = this.num1 * this.num2;
         return this.displayValue;
     }
 
-    protected divide() {
+    protected divide(): number {
         this.num1 = this.displayValue = this.num1 / this.num2;
         return this.displayValue;
     }
